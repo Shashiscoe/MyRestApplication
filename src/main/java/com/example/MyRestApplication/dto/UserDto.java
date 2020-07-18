@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class User implements Serializable {
+public class UserDto implements Serializable {
 
 	private static final long serialVersionUID = 2033875254717031526L;
 	
@@ -59,7 +59,7 @@ public class User implements Serializable {
 		this.createddate = createddate;
 	}
 
-	public User(int id, String name, String city, Date createddate) {
+	public UserDto(int id, String name, String city, Date createddate) {
 		super();
 		this.id = id;
 		this.name = name;

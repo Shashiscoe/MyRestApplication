@@ -21,31 +21,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.MyRestApplication.dto.User;
+import com.example.MyRestApplication.dto.UserDto;
 
 @RequestMapping("/users/")
 @RestController
 public class UserController {
 
-	public static List<User> users = new ArrayList<User>();
+	public static List<UserDto> users = new ArrayList<UserDto>();
 
 	{
-		users.add(new User(1, "ravi kumar", "Sasaram", new Date()));
-		users.add(new User(2, "amit kumar", "Delhi", new Date()));
-		users.add(new User(3, null, "", new Date()));
+		users.add(new UserDto(1, "ravi kumar", "Sasaram", new Date()));
+		users.add(new UserDto(2, "amit kumar", "Delhi", new Date()));
+		users.add(new UserDto(3, null, "", new Date()));
 	}
 
 	@GetMapping("{id}")
-	public EntityModel<User> getUser(@PathVariable int id) {
+	public EntityModel<UserDto> getUser(@PathVariable int id) {
 
 		if (users.size() - 1 < id) {
 			throw new UserNotFoundException("User not found with id - " + id);
 		}
-		User user = users.get(id);
+		UserDto user = users.get(id);
 
 		// "all-users", SERVER_PATH + "/users"
 		// getUsers
-		EntityModel<User> resource = EntityModel.of(user);
+		EntityModel<UserDto> resource = EntityModel.of(user);
 
 		WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getUsers());
 
@@ -56,13 +56,13 @@ public class UserController {
 	}
 
 	@GetMapping
-	public List<User> getUsers() {
+	public List<UserDto> getUsers() {
 
 		return users;
 	}
 
 	@PostMapping
-	public ResponseEntity<Object> saveUser(@Valid @RequestBody User user) {
+	public ResponseEntity<Object> saveUser(@Valid @RequestBody UserDto user) {
 		users.add(user);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		return ResponseEntity.created(uri).build();
