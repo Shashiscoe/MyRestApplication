@@ -1,6 +1,8 @@
 package com.example.MyRestApplication.generic.exception;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,15 +40,21 @@ public class CustomizeResponseEntityExceptionHandler extends ResponseEntityExcep
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
 
 	}
-	
+
 	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(
-			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Validation Failed",
-				ex.getBindingResult().toString());
+				extractedValidationMessage(ex));
 
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+
+	private String extractedValidationMessage(MethodArgumentNotValidException ex) {
+		List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(x -> x.getDefaultMessage())
+				.collect(Collectors.toList());
+		return errors.toString().substring(1, errors.toString().length() - 1);
 	}
 
 }

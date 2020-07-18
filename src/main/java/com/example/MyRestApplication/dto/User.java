@@ -3,6 +3,8 @@ package com.example.MyRestApplication.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,6 +17,9 @@ public class User implements Serializable {
 	
 	private int id;
 	
+	
+	@NotNull(message = "Please provide a name ,message should not null")
+	@NotEmpty(message = "Please provide a name, message should not empty")
 	@Size(min = 2, max = 10,message = "Name should be atleast of 2 Character or atmost 10 character")
 	private String name;
 	private String city;
