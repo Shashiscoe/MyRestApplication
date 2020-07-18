@@ -12,4 +12,8 @@ public interface UserService {
 
 	public UserDto getUser(int id);
 
+	public UserDto updateUser(UserDto userDto);
+
+	void deleteUser(int id);
+
 }

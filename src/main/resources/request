@@ -1,0 +1,52 @@
+1. post
+
+		{
+		    
+		    "name": "guddu",
+		    "city": "Sasaram",
+		    "createddate": "2020-07-18"
+		}
+
+
+2. Get 
+
+		[
+		    {
+		        "id": 1,
+		        "name": "guddu",
+		        "city": "Sasaram",
+		        "createddate": "2020-07-18"
+		    }
+		]
+
+3. Get 
+
+		{
+		    "id": 1,
+		    "name": "guddu",
+		    "city": "Sasaram",
+		    "createddate": "2020-07-18",
+		    "_links": {
+		        "all-users": {
+		            "href": "http://localhost:8080/users/"
+		        }
+		    }
+		}
+		
+4. Delete
+
+ http://localhost:8080/users/1
+ 
+ 
+5. Put
+
+		   {
+		        "id": 1,
+		        "name": "guddu",
+		        "city": "mumbai",
+		        "createddate": "2020-07-22"
+		    }
+
+ 
+ 		
+		

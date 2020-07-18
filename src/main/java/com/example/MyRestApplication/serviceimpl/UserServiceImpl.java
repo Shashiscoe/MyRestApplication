@@ -38,7 +38,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto getUser(int id) {
 		// TODO Auto-generated method stub
-		return modelMapper.map(userServiceDio.getUser(id),UserDto.class);
+		return modelMapper.map(userServiceDio.getUser(id), UserDto.class);
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		userServiceDio.deleteUser(id);
+	}
+
+	@Override
+	public UserDto updateUser(UserDto userDto) {
+
+		return modelMapper.map(userServiceDio.updateUser(modelMapper.map(userDto, User.class)), UserDto.class);
 	}
 
 }

@@ -33,4 +33,19 @@ public class UserServiceDioImpl implements UserServiceDio {
 
 		return entityManager.find(User.class, id);
 	}
+
+	@Override
+	public void deleteUser(int id) {
+		entityManager.remove(entityManager.find(User.class, id));
+	}
+
+	@Override
+	public User updateUser(User user) {
+		User dbUser = entityManager.find(User.class, user.getId());
+		dbUser.setName(user.getName());
+		dbUser.setCity(user.getCity());
+		dbUser.setCreateddate(user.getCreateddate());
+		return (User) entityManager.merge(dbUser);
+
+	}
 }

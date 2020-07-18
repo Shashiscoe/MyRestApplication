@@ -12,4 +12,8 @@ public interface UserServiceDio {
 
 	public User getUser(int id);
 
+	User updateUser(User user);
+
+	void deleteUser(int id);
+
 }
