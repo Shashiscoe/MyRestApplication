@@ -1,5 +1,8 @@
 package com.example.MyRestApplication.serviceimpl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -24,6 +27,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int saveUser(UserDto userDto) {
 		return userServiceDio.saveUser(modelMapper.map(userDto, User.class));
+	}
+
+	@Override
+	public List<UserDto> getUsers() {
+		return userServiceDio.getUsers().stream().map(user -> modelMapper.map(user, UserDto.class))
+				.collect(Collectors.toList());
 	}
 
 }

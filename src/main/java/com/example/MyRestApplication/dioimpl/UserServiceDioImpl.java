@@ -1,5 +1,7 @@
 package com.example.MyRestApplication.dioimpl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -18,5 +20,11 @@ public class UserServiceDioImpl implements UserServiceDio {
 	public int saveUser(User user) {
 		entityManager.persist(user);
 		return user.getId();
+	}
+
+	@Override
+	public List<User> getUsers() {
+		   
+		return (List<User>)entityManager.createQuery("SELECT u FROM User u").getResultList();
 	}
 }

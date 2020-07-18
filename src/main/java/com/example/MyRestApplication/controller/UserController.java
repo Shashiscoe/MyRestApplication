@@ -63,7 +63,7 @@ public class UserController {
 	@GetMapping
 	public List<UserDto> getUsers() {
 
-		return users;
+		return userService.getUsers();
 	}
 
 	@PostMapping
