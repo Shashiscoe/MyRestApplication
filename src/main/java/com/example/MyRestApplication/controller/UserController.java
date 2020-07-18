@@ -1,5 +1,8 @@
 package com.example.MyRestApplication.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +10,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +36,23 @@ public class UserController {
 	}
 
 	@GetMapping("{id}")
-	public User getUser(@PathVariable int id) {
-		
-		if(users.size()-1<id) {
-			throw new UserNotFoundException("User not found with id - " +id);
-		}
+	public EntityModel<User> getUser(@PathVariable int id) {
 
-		return users.get(id);
+		if (users.size() - 1 < id) {
+			throw new UserNotFoundException("User not found with id - " + id);
+		}
+		User user = users.get(id);
+
+		// "all-users", SERVER_PATH + "/users"
+		// getUsers
+		EntityModel<User> resource = EntityModel.of(user);
+
+		WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getUsers());
+
+		resource.add(linkTo.withRel("all-users"));
+
+		return resource;
+
 	}
 
 	@GetMapping
