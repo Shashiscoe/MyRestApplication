@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +47,7 @@ public class UserController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Object> saveUser(@RequestBody User user) {
+	public ResponseEntity<Object> saveUser(@Valid @RequestBody User user) {
 		users.add(user);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		return ResponseEntity.created(uri).build();

@@ -3,6 +3,8 @@ package com.example.MyRestApplication.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -13,7 +15,7 @@ public class User implements Serializable {
 	
 	private int id;
 	
-	
+	@Size(min = 2, max = 10,message = "Name should be atleast of 2 Character or atmost 10 character")
 	private String name;
 	private String city;
 
