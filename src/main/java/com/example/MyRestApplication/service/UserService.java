@@ -10,4 +10,6 @@ public interface UserService {
 
 	public List<UserDto> getUsers();
 
+	public UserDto getUser(int id);
+
 }

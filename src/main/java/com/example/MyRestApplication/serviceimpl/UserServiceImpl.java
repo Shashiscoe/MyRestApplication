@@ -35,4 +35,10 @@ public class UserServiceImpl implements UserService {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public UserDto getUser(int id) {
+		// TODO Auto-generated method stub
+		return modelMapper.map(userServiceDio.getUser(id),UserDto.class);
+	}
+
 }

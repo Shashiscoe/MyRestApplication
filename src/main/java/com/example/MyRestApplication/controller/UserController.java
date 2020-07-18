@@ -46,7 +46,7 @@ public class UserController {
 		if (users.size() - 1 < id) {
 			throw new UserNotFoundException("User not found with id - " + id);
 		}
-		UserDto user = users.get(id);
+		UserDto user = userService.getUser(id);
 
 		// "all-users", SERVER_PATH + "/users"
 		// getUsers

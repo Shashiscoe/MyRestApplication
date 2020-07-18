@@ -24,7 +24,13 @@ public class UserServiceDioImpl implements UserServiceDio {
 
 	@Override
 	public List<User> getUsers() {
-		   
-		return (List<User>)entityManager.createQuery("SELECT u FROM User u").getResultList();
+
+		return (List<User>) entityManager.createQuery("SELECT u FROM User u").getResultList();
+	}
+
+	@Override
+	public User getUser(int id) {
+
+		return entityManager.find(User.class, id);
 	}
 }
