@@ -30,6 +30,10 @@ public class UserController {
 
 	@GetMapping("{id}")
 	public User getUser(@PathVariable int id) {
+		
+		if(users.size()-1<id) {
+			throw new UserNotFoundException("User not found with id - " +id);
+		}
 
 		return users.get(id);
 	}
