@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.MyRestApplication.dto.UserDto;
+import com.example.MyRestApplication.service.UserService;
 
 @RequestMapping("/users/")
 @RestController
 public class UserController {
+
+	@Autowired
+	private UserService userService;
 
 	public static List<UserDto> users = new ArrayList<UserDto>();
 
@@ -62,9 +67,9 @@ public class UserController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Object> saveUser(@Valid @RequestBody UserDto user) {
-		users.add(user);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+	public ResponseEntity<Object> saveUser(@Valid @RequestBody UserDto userDto) {
+		int id = userService.saveUser(userDto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 

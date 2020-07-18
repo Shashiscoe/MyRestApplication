@@ -14,13 +14,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class UserDto implements Serializable {
 
 	private static final long serialVersionUID = 2033875254717031526L;
-	
+
 	private int id;
-	
-	
+
 	@NotNull(message = "Please provide a name ,message should not null")
 	@NotEmpty(message = "Please provide a name, message should not empty")
-	@Size(min = 2, max = 10,message = "Name should be atleast of 2 Character or atmost 10 character")
+	@Size(min = 2, max = 10, message = "Name should be atleast of 2 Character or atmost 10 character")
 	private String name;
 	private String city;
 
@@ -65,6 +64,10 @@ public class UserDto implements Serializable {
 		this.name = name;
 		this.city = city;
 		this.createddate = createddate;
+	}
+
+	public UserDto() {
+		super();
 	}
 
 }
